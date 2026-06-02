@@ -132,15 +132,25 @@ dialog::backdrop{
     width: 30px;
 }
 
+.EntityTitle input{
+    width: 100px;
+}
+
 .EditStats{
     display: grid;
     gap: 10px;
     text-align: center;
-    grid-template-columns: minmax(min-content, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
 }
 
-.EditStats input{
+.EditStats div{
+    display: inline-block;
+}
+
+.EditEntityData input{
     text-align: center;
+    border: none;
+    border-bottom: 1px solid black
 }
 
 .EditEntityData a:link{

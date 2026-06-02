@@ -27,8 +27,8 @@ export default function AddEntity(props){
     },[])
 
     return(
-        <dialog ref={dialogRef} className="AddEntity" onCancel={()=>{props.setOpen(prevOpen=>!prevOpen)}}>
-            <img className="closeIcon" src={closeIcon} onClick={()=>{props.setOpen(prevOpen=>!prevOpen)}}/>
+        <dialog ref={dialogRef} className="AddEntity" onCancel={()=>{props.setOpen(false)}}>
+            <img className="closeIcon" src={closeIcon} onClick={()=>{props.setOpen(false)}}/>
             <h2>Add Entity</h2>
             <div>
                 <label>Entity Type:</label>
@@ -38,7 +38,12 @@ export default function AddEntity(props){
                     {entityTypes.map(e=><option key={e.index} value={e.name}>{e.name}</option>)}
                 </select>
             </div>
-            <button disabled={selectedType==="-"} onClick={()=>{
+            <button disabled={selectedType==="-"} onClick={async ()=>{
+                let data;
+                if(entityTypes.find(e=>e.name===selectedType).url){
+                    const result = await fetch(`https://dnd5eapi.co${entityTypes.find(e=>e.name===selectedType).url}`)
+                    data = await result.json()
+                }
                 props.setNodes((prevnodes)=>[
                     ...prevnodes,
                     {id: prevnodes.length.toString(), 
@@ -46,16 +51,26 @@ export default function AddEntity(props){
                     data: {
                         label: selectedType, 
                         url: entityTypes.find(e=>e.name===selectedType).url,
+                        img: data?.image || "",
                         size: props.size, 
                         setOpen: props.setEditEntityOpen,
                         setDialogEntityId: props.setDialogEntityId,
+                        currHealth: data?.hit_points || "",
+                        maxHealth: data?.hit_points || "",
+                        armorClass: data?.armor_class?.[0]?.value || "",
+                        strength: data?.strength || "",
+                        dexterity: data?.dexterity || "",
+                        constitution: data?.constitution || "",
+                        intelligence: data?.intelligence || "",
+                        wisdom: data?.wisdom || "",
+                        charisma: data?.charisma || "",
                     }, 
                     type: 'entity', 
                     measured: {
                         width: props.size, 
                         height: props.size
                 }}])
-                props.setOpen(prevOpen=>!prevOpen)
+                props.setOpen(false)
                 }}
                 >Add To Battle</button>
         </dialog>

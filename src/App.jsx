@@ -36,29 +36,6 @@ export default function Main() {
     })})
   },[])
 
-  //generator for nodes
-  if(nodes.length <= 0){ //man idk maybe it can happen
-    for(let i = 0; i<6;i++){
-      initialNodes.push({
-        id: i.toString(),
-        position: {
-          x: (i%3)*size,
-          y: (i%2)*size
-        },
-        data: {
-          label: `Node ${i}`,
-          url: "/api/2014/monsters/adult-black-dragon",
-          size: size,
-          setOpen: setOpen,
-          setDialogEntityId: setDialogEntityId,
-        },
-        type: 'entity',
-      })
-    }
-  }
-
-
-
   const onNodesChange = useCallback(
     (changes) => {
       setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot));
