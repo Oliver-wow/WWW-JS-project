@@ -3,7 +3,7 @@ import closeIcon from "../assets/close.svg"
 
 export default function AddEntity(props){
     const [entityTypes,setEntityTypes] = useState([])
-    const [selectedType, setSelectedType] = useState("")
+    const [selectedType, setSelectedType] = useState("-")
 
     const dialogRef = useRef(null)
     
@@ -27,17 +27,18 @@ export default function AddEntity(props){
     },[])
 
     return(
-        <dialog ref={dialogRef} className="AddEntity">
+        <dialog ref={dialogRef} className="AddEntity" onCancel={()=>{props.setOpen(prevOpen=>!prevOpen)}}>
             <img className="closeIcon" src={closeIcon} onClick={()=>{props.setOpen(prevOpen=>!prevOpen)}}/>
             <h2>Add Entity</h2>
             <div>
                 <label>Entity Type:</label>
                 <br/>
                 <select value={selectedType} onChange={e=> setSelectedType(e.target.value)}>
+                    <option value='-'>-</option>
                     {entityTypes.map(e=><option key={e.index} value={e.name}>{e.name}</option>)}
                 </select>
             </div>
-            <button disabled={selectedType===""} onClick={()=>{
+            <button disabled={selectedType==="-"} onClick={()=>{
                 props.setNodes((prevnodes)=>[
                     ...prevnodes,
                     {id: prevnodes.length.toString(), 

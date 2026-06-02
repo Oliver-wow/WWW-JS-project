@@ -80,7 +80,7 @@ export default function Main() {
           <Background variant="dots" gap={50} size={1} />
         </ReactFlow>
       </div>
-      {open && <EditEntity open={open} setOpen={setOpen} entityId={dialogEntityId} nodes={nodes}/>}
+      {open && <EditEntity open={open} setOpen={setOpen} entityId={dialogEntityId} nodes={nodes} setNodes={setNodes}/>}
     </>
   );
 }

@@ -57,7 +57,7 @@ dialog{
     text-wrap-mode: wrap;
 }
 
-dialog h2{
+dialog > h2{
     border-bottom: 2px solid lightgray;
     margin-bottom: 10px;
 }
@@ -76,7 +76,7 @@ dialog h2{
     height: 30px
 }
 
-select:focus{
+select,input:focus{
     outline: none;
 }
 
@@ -108,4 +108,64 @@ dialog::backdrop{
 
 .entity img{
     height: 100%;
+}
+
+.EditEntityData{
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.EditEntityData img{
+    border-radius: 100px;
+}
+
+.EntityTitle{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.EditEntityData input{
+    width: 30px;
+}
+
+.EditStats{
+    display: grid;
+    gap: 10px;
+    text-align: center;
+    grid-template-columns: minmax(min-content, 1fr);
+}
+
+.EditStats input{
+    text-align: center;
+}
+
+.EditEntityData a:link{
+    color: gray;
+    background-color: transparent;
+    text-decoration: none;
+
+}
+
+.EditEntityData a:visited{
+    color: gray;
+    background-color: transparent;
+    text-decoration: none;
+
+}
+
+.EditEntityData a:hover{
+    color: gray;
+    background-color: transparent;
+    text-decoration: underline;
+
+}
+
+.EditEntityData a:active{
+    color: gray;
+    background-color: transparent;
+    text-decoration: underline;
 }
