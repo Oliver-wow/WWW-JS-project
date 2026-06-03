@@ -4,7 +4,6 @@ import missingLogo from '../assets/image-missing.svg'
 import TrashIcon from '../assets/icon'
 
 export default function EditEntity(props){
-    console.log(props.nodes, props.entityId)
     const { data } = props.nodes.find(node=>node.id===props.entityId)
     const [entity, setEntity] = useState({})
     const [img, setImg] = useState(data.img)
@@ -109,7 +108,7 @@ export default function EditEntity(props){
                 </div>
                 <div className="EditEntityFooter">
                     {data?.url && <a target="_blank" href={`https://5e.tools/bestiary.html#${data.label + '_mm'}`}>Source to Wiki</a>}
-                    <TrashIcon onClick={()=>{deleteNode();console.log(props.nodes)}}/>
+                    <TrashIcon onClick={()=>{deleteNode()}}/>
                 </div>
             </div>
         </dialog>
