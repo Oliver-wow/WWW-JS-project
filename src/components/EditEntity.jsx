@@ -62,8 +62,6 @@ export default function EditEntity(props){
 
     function deleteNode(){
         props.setNodes(prevNodes=>{
-            console.log(prevNodes)
-            console.log(prevNodes.filter((node,index)=>index!=prevNodes.indexOf(prevNodes.find(node=>node.id === props.entityId))))
             return prevNodes.filter((node,index)=>index!=prevNodes.indexOf(prevNodes.find(node=>node.id === props.entityId))) // should delete the node that is currently being edited
         })
         props.setOpen(false)
@@ -82,7 +80,7 @@ export default function EditEntity(props){
                 </div>
                 {editImg && <input placeholder="link to your custom image" id="EditImg" value={img} onChange={(e)=>setImg(e.target.value)}/>}
                 <p>Hit Points: <input value={currHealth} onChange={(e)=>setCurrHealth(e.target.value)}/>/{data?.url ? data.maxHealth : <input min={1} value={maxHealth} onChange={(e)=>setMaxHealth(e.target.value)}/>}</p>
-                <p>Armor Class: {data?.url ? data?.armor_class?.[0]?.value : <input value={armorClass} onChange={(e)=>{setArmorClass(e.target.value)}}/>}</p>
+                <p>Armor Class: {data?.url ? data.armorClass : <input value={armorClass} onChange={(e)=>{setArmorClass(e.target.value)}}/>}</p>
                 <div className="EditStats">
                     <div>
                         <p>{data?.url ? data.strength : <input value={strength} onChange={(e)=>setStrength(e.target.value)}/>}</p>

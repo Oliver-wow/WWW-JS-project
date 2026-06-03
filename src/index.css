@@ -73,7 +73,9 @@ dialog > h2{
 .AddEntity select{
     border: none;
     background-color:rgb(242, 238, 238);
-    height: 30px
+    height: 30px;
+    max-width: 200px;
+    width: 100%;
 }
 
 select,input:focus{
@@ -198,4 +200,53 @@ dialog::backdrop{
     margin-top: auto;
     display: flex;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 600px){
+    .EditEntityData{
+        gap: 40px
+    }
+}
+
+@media screen and (max-width: 450px) {
+    header{
+        flex-direction: column;
+        align-items: center;
+        height: 80px;
+    }
+    dialog{
+        width: 80%;
+        height: 80%;
+        top: 10%;
+        left: 10%;
+    }
+
+    .AddEntity{
+        height: 80%;
+    }
+}
+
+@media screen and (max-width: 348px) {
+    header{
+        height: 120px;
+    }
+}
+
+@media screen and (max-width: 238px) {
+    header{
+        height: 160px;
+    }
+    .EntityTitle{
+        flex-direction: column;
+    }
+
+    .EditEntityData{
+        text-align: center;
+    }
+
+    .EditEntityFooter{
+        flex-direction: column;
+        align-items: center;
+        gap:20px
+    }
 }
