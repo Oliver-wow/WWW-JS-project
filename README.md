@@ -1,16 +1,18 @@
-# React + Vite
+Webová aplikace, která bude sloužit jako místo na uložení stavu bitvy a charakterů v D&D kampani
+Hlavní využití bude pro DM kampaně, protože na postavách jsou lze vidět některé statistiky, které by mohli zvýhodnit hráče
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplikace bude využivat ReactFlow nodes pro lokace a statistiky postav (např. životy)
+Tyto nodes budou ukládány do local storage
 
-Currently, two official plugins are available:
+Jako postavy lze najít vlastní / hráčskou postavu a dále mostra z D&D
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+V aplikaci si prvně uživatel přídá postavy s tlačítkem Add Entity a vybere typ
+Potom co přidá všechny potřebné postavy je může samostatně editovat
+Jak se bude bitva vyvýjet může DM měnit životy hráčů a moster
+Pokud mostrum zemře, je možné entitu odstranit
 
-## React Compiler
+K získání informaci o mostrách z D&D bude použit 5etools api z edice roku 2014 (https://5e-bits.github.io/docs/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+K získání informaci byl použit endpoint https://www.dnd5eapi.co/api/2014/monsters, ze kterého potom vznikají další pro samostatné mostra
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Projekt by dál mohl být rozvinut aby byly různé adresy pro hráče a DM
