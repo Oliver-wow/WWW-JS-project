@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from "react"
 import closeIcon from "../assets/close.svg"
 import missingLogo from '../assets/image-missing.svg'
+import TrashIcon from '../assets/icon'
 
 export default function EditEntity(props){
-    const { data } = props.nodes[props.entityId]
+    console.log(props.nodes, props.entityId)
+    const { data } = props.nodes.find(node=>node.id===props.entityId)
     const [entity, setEntity] = useState({})
     const [img, setImg] = useState(data.img)
     const [label, setLabel] = useState(data.label)
@@ -56,17 +58,29 @@ export default function EditEntity(props){
                 }
             })
         })
-    },[currHealth,maxHealth, armorClass, strength, dexterity, constitution, intelligence, wisdom, charisma])
+    },[label, img, currHealth,maxHealth, armorClass, strength, dexterity, constitution, intelligence, wisdom, charisma])
+
+    function deleteNode(){
+        props.setNodes(prevNodes=>{
+            console.log(prevNodes)
+            console.log(prevNodes.filter((node,index)=>index!=prevNodes.indexOf(prevNodes.find(node=>node.id === props.entityId))))
+            return prevNodes.filter((node,index)=>index!=prevNodes.indexOf(prevNodes.find(node=>node.id === props.entityId))) // should delete the node that is currently being edited
+        })
+        props.setOpen(false)
+    }
+
+    const [editImg, setEditImg] = useState(false)
 
     return(
-        <dialog ref={dialogRef} className="EditEntity" onCancel={()=>{props.setOpen(prevOpen=>!prevOpen)}}>
-            <img className="closeIcon" src={closeIcon} onClick={()=>{props.setOpen(prevOpen=>!prevOpen)}}/>
+        <dialog ref={dialogRef} className="EditEntity" onCancel={()=>{props.setOpen(false)}}>
+            <img className="closeIcon" src={closeIcon} onClick={()=>{props.setOpen(false)}}/>
             <h2>Edit Entity</h2>
             <div className="EditEntityData">
                 <div className="EntityTitle">
-                    <img height="40px" width="40px" src={data.img ? (data.img.startsWith("/api/images/monsters/") ? `https://dnd5eapi.co${data.img}` : data.img) : missingLogo}/>
+                    <img height="40px" width="40px" onClick={()=>{if(!data?.url) setEditImg(prevEdit=>!prevEdit)}} src={data.img ? (data.img.startsWith("/api/images/monsters/") ? `https://dnd5eapi.co${data.img}` : data.img) : missingLogo}/>
                     <h2>{data?.url ? data.label : <input value={label} onChange={(e)=>setLabel(e.target.value)}/>}</h2>
                 </div>
+                {editImg && <input placeholder="link to your custom image" id="EditImg" value={img} onChange={(e)=>setImg(e.target.value)}/>}
                 <p>Hit Points: <input value={currHealth} onChange={(e)=>setCurrHealth(e.target.value)}/>/{data?.url ? data.maxHealth : <input min={1} value={maxHealth} onChange={(e)=>setMaxHealth(e.target.value)}/>}</p>
                 <p>Armor Class: {data?.url ? data?.armor_class?.[0]?.value : <input value={armorClass} onChange={(e)=>{setArmorClass(e.target.value)}}/>}</p>
                 <div className="EditStats">
@@ -95,7 +109,10 @@ export default function EditEntity(props){
                         <p>Charisma</p>
                     </div>
                 </div>
-                {data?.url && <a target="_blank" href={`https://5e.tools/bestiary.html#${entity.name + '_mm'}`}>Source to Wiki</a>}
+                <div className="EditEntityFooter">
+                    {data?.url && <a target="_blank" href={`https://5e.tools/bestiary.html#${data.label + '_mm'}`}>Source to Wiki</a>}
+                    <TrashIcon onClick={()=>{deleteNode();console.log(props.nodes)}}/>
+                </div>
             </div>
         </dialog>
     )

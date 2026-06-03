@@ -136,6 +136,10 @@ dialog::backdrop{
     width: 100px;
 }
 
+#EditImg{
+    width: 100%;
+}
+
 .EditStats{
     display: grid;
     gap: 10px;
@@ -178,4 +182,20 @@ dialog::backdrop{
     color: gray;
     background-color: transparent;
     text-decoration: underline;
+}
+
+.TrashIcon{
+    color: #9CA3AF;
+}
+
+.TrashIcon:hover{
+    color: #c44539;
+    scale: 1.2;
+    transition: 0.5s;
+}
+
+.EditEntityFooter{
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
 }

@@ -46,7 +46,7 @@ export default function AddEntity(props){
                 }
                 props.setNodes((prevnodes)=>[
                     ...prevnodes,
-                    {id: prevnodes.length.toString(), 
+                    {id: Date.now().toString(), 
                     position: {x: 0, y: 0}, 
                     data: {
                         label: selectedType, 

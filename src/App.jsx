@@ -19,7 +19,7 @@ export default function Main() {
   const [open,setOpen] = useState(false);
   const [dialogEntityId,setDialogEntityId] = useState(0);
 
-  useEffect(()=>{ //saves the locations of the nodes everytime the 
+  useEffect(()=>{ //saves the locations of the nodes
     localStorage.setItem("entities", JSON.stringify(nodes))
   },[nodes])
 
