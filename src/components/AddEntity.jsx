@@ -39,6 +39,7 @@ export default function AddEntity(props){
                 </select>
             </div>
             <button disabled={selectedType==="-"} onClick={async ()=>{
+                props.setOpen(false)
                 let data;
                 if(entityTypes.find(e=>e.name===selectedType).url){
                     const result = await fetch(`https://dnd5eapi.co${entityTypes.find(e=>e.name===selectedType).url}`)
@@ -49,7 +50,8 @@ export default function AddEntity(props){
                     {id: Date.now().toString(), 
                     position: {x: 0, y: 0}, 
                     data: {
-                        label: selectedType, 
+                        label: selectedType,
+                        selected: false,
                         url: entityTypes.find(e=>e.name===selectedType).url,
                         img: data?.image || "",
                         size: props.size, 
@@ -64,13 +66,13 @@ export default function AddEntity(props){
                         intelligence: data?.intelligence || "",
                         wisdom: data?.wisdom || "",
                         charisma: data?.charisma || "",
+                        initiative: "",
                     }, 
                     type: 'entity', 
                     measured: {
                         width: props.size, 
                         height: props.size
                 }}])
-                props.setOpen(false)
                 }}
                 >Add To Battle</button>
         </dialog>

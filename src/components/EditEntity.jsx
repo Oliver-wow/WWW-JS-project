@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import closeIcon from "../assets/close.svg"
 import missingLogo from '../assets/image-missing.svg'
-import TrashIcon from '../assets/icon'
+import {TrashIcon} from '../assets/icon'
 
 export default function EditEntity(props){
     const { data } = props.nodes.find(node=>node.id===props.entityId)
@@ -17,6 +17,7 @@ export default function EditEntity(props){
     const [intelligence, setIntelligence] = useState(data.intelligence)
     const [wisdom, setWisdom] = useState(data.wisdom)
     const [charisma, setCharisma] = useState(data.charisma)
+    const [initiative, setInitiative] = useState(data.initiative)
 
     const dialogRef = useRef(null)
 
@@ -48,7 +49,8 @@ export default function EditEntity(props){
                             constitution: constitution,
                             intelligence: intelligence,
                             wisdom: wisdom,
-                            charisma: charisma
+                            charisma: charisma,
+                            initiative: initiative,
                         }
                     }
                 }
@@ -57,7 +59,7 @@ export default function EditEntity(props){
                 }
             })
         })
-    },[label, img, currHealth,maxHealth, armorClass, strength, dexterity, constitution, intelligence, wisdom, charisma])
+    },[label, img, currHealth,maxHealth, armorClass, strength, dexterity, constitution, intelligence, wisdom, charisma, initiative])
 
     function deleteNode(){
         props.setNodes(prevNodes=>{
@@ -79,6 +81,7 @@ export default function EditEntity(props){
                 </div>
                 {editImg && <input placeholder="link to your custom image" id="EditImg" value={img} onChange={(e)=>setImg(e.target.value)}/>}
                 <p>Hit Points: <input value={currHealth} onChange={(e)=>setCurrHealth(e.target.value)}/>/{data?.url ? data.maxHealth : <input min={1} value={maxHealth} onChange={(e)=>setMaxHealth(e.target.value)}/>}</p>
+                <p>Initiative: <input value={initiative} onChange={(e)=>setInitiative(e.target.value)}/></p>
                 <p>Armor Class: {data?.url ? data.armorClass : <input value={armorClass} onChange={(e)=>{setArmorClass(e.target.value)}}/>}</p>
                 <div className="EditStats">
                     <div>
